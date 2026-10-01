@@ -1,0 +1,57 @@
+---
+import Icon from "../Icon.astro";
+
+const pasos = [
+  {
+    icon: "chat" as const,
+    title: "Charla",
+    text: "Nos conocemos. Escuchamos tu idea, tus necesidades y el lugar donde va a nacer el proyecto.",
+  },
+  {
+    icon: "compass" as const,
+    title: "Diseño",
+    text: "Convertimos esa charla en un proyecto a medida: planos, materiales y una mirada sustentable en cada decisión.",
+  },
+  {
+    icon: "build" as const,
+    title: "Obra",
+    text: "Acompañamos la construcción de punta a punta, con el mismo cuidado con el que la diseñamos.",
+  },
+  {
+    icon: "handshake" as const,
+    title: "Entrega",
+    text: "Te entregamos el espacio terminado — y seguimos cerca para lo que necesites después.",
+  },
+];
+---
+
+<section id="proceso" class="texture-paper scroll-mt-28 bg-forest text-cream">
+  <div class="section-pad mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow text-sand-light">Cómo trabajamos</p>
+      <h2 class="font-display mt-3 text-3xl font-semibold sm:text-4xl">
+        Consulta personalizada, uno a uno, hasta la obra terminada
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-cream/80">
+        Así es el camino que recorremos juntos en cada proyecto, sin pasos salteados.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      {pasos.map((paso, index) => (
+        <div data-reveal style={`--reveal-delay: ${index * 90}ms`} class="relative min-w-0">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream/10 text-sand-light">
+              <Icon name={paso.icon} class="h-6 w-6" />
+            </div>
+            <span class="font-display text-3xl font-semibold text-cream/25">
+              0{index + 1}
+            </span>
+          </div>
+          <h3 class="font-display mt-5 text-lg font-semibold">{paso.title}</h3>
+          <p class="mt-2 text-base leading-relaxed text-cream/75">{paso.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

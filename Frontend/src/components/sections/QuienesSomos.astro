@@ -1,0 +1,64 @@
+---
+import Photo from "../Photo.astro";
+import { SITE } from "../../data/site";
+---
+
+<section id="nosotros" class="section-pad scroll-mt-28 mx-auto max-w-6xl px-5 sm:px-8">
+  <div class="grid items-center gap-12 lg:grid-cols-2">
+    <div class="min-w-0">
+      <p class="eyebrow">¿Quiénes somos?</p>
+      <h2 class="font-display mt-3 text-balance text-3xl font-semibold text-forest sm:text-4xl">
+        Un estudio chico, con cada proyecto hecho a medida
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-ink-soft">
+        Somos un estudio de Rosario formado por{" "}
+        <strong class="text-ink">Paula Sánchez</strong>, arquitecta, y su hermano{" "}
+        <strong class="text-ink">Martín</strong>, encargado del paisajismo. Juntos
+        acompañamos cada proyecto de principio a fin: no solo diseñamos espacios, también
+        los construimos — y los llenamos de verde.
+      </p>
+      <p class="mt-4 text-base leading-relaxed text-ink-soft">
+        Trabajamos de forma personalizada y uno a uno con cada cliente, porque entendemos
+        que cada casa, local o jardín tiene su propia historia.
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          SITE.founders.map((founder) => (
+            <div class="rounded-xl border border-forest/15 bg-cream-dark/60 p-4">
+              <p class="font-display text-lg font-semibold text-forest">{founder.name}</p>
+              <p class="text-base text-ink-soft">{founder.role}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="grid min-w-0 grid-cols-2 gap-4">
+      <Photo
+        src="/images/estudio/paula-obra.webp"
+        alt="Arquitecta de espaldas en una obra residencial de Rosario"
+        label="Paula en obra"
+        icon="house"
+        tone="forest"
+        class="col-span-2 aspect-[16/10] w-full rounded-2xl"
+      />
+      <Photo
+        src="/images/estudio/martin-jardin.webp"
+        alt="Paisajista trabajando en un jardín, sin el rostro visible"
+        label="Martín en jardín"
+        icon="leaf"
+        tone="olive"
+        class="aspect-square w-full rounded-2xl"
+      />
+      <Photo
+        src="/images/estudio/equipo.webp"
+        alt="Dos personas trabajando juntas sobre una mesa de madera"
+        label="Equipo"
+        icon="house"
+        tone="sand"
+        class="aspect-square w-full rounded-2xl"
+      />
+    </div>
+  </div>
+</section>

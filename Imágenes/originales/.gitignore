@@ -1,0 +1,8 @@
+# Originales pesados de AI Studio — no commitear
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.webp
+!README.md

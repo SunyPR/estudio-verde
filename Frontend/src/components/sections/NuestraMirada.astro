@@ -1,0 +1,53 @@
+---
+import Icon from "../Icon.astro";
+
+const pilares = [
+  {
+    icon: "leaf" as const,
+    title: "Materiales conscientes",
+    text: "Priorizamos materiales sustentables y de bajo impacto, elegidos para durar y envejecer bien.",
+  },
+  {
+    icon: "compass" as const,
+    title: "Luz y ventilación natural",
+    text: "Orientamos cada proyecto para aprovechar el sol y el aire antes de pensar en climatización artificial.",
+  },
+  {
+    icon: "house" as const,
+    title: "El verde como parte del diseño",
+    text: "El paisajismo no es un agregado al final: lo pensamos junto con la arquitectura, desde el primer plano.",
+  },
+];
+---
+
+<section class="texture-paper bg-cream-dark/70">
+  <div class="section-pad mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow">Nuestra mirada</p>
+      <h2 class="font-display mt-3 text-3xl font-semibold text-forest sm:text-4xl">
+        Diseñar bien y diseñar en conciencia con el ambiente, para nosotros, es lo mismo
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-ink-soft">
+        Cada proyecto busca convivir con su entorno, no imponerse sobre él. Pensamos la
+        luz, el verde y los materiales como parte de una misma decisión de diseño, no
+        como detalles de último momento.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-3">
+      {pilares.map((pilar, index) => (
+        <div
+          data-reveal
+          style={`--reveal-delay: ${index * 90}ms`}
+          class="rounded-2xl border border-forest/10 bg-cream p-6 shadow-sm shadow-forest/5"
+        >
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-forest/10 text-forest">
+            <Icon name={pilar.icon} class="h-6 w-6" />
+          </div>
+          <h3 class="font-display mt-4 text-lg font-semibold text-forest">{pilar.title}</h3>
+          <p class="mt-2 text-base leading-relaxed text-ink-soft">{pilar.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

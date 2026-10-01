@@ -1,0 +1,55 @@
+---
+import Photo from "./Photo.astro";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  aspect?: "4/3" | "4/5";
+  /** En el inicio alcanza el título. La descripción larga queda en Proyectos y al abrir la foto. */
+  compact?: boolean;
+}
+
+const { project, aspect = "4/3", compact = false } = Astro.props;
+
+const iconByCategory = {
+  casas: "house",
+  remodelaciones: "remodel",
+  locales: "store",
+  jardines: "leaf",
+} as const;
+
+const toneByCategory = {
+  casas: "forest",
+  remodelaciones: "terracotta",
+  locales: "olive",
+  jardines: "sand",
+} as const;
+
+const labelByCategory: Record<Project["category"], string> = {
+  casas: "Casas",
+  remodelaciones: "Remodelación",
+  locales: "Local comercial",
+  jardines: "Jardines y exteriores",
+};
+
+const aspectClass = aspect === "4/5" ? "aspect-[4/5]" : "aspect-[4/3]";
+---
+
+<article data-category={project.category} class="group min-w-0">
+  <button type="button" class="card-hit" data-project-open={project.id} aria-haspopup="dialog" aria-controls="proyecto-dialog">
+    <span class="sr-only">Abrir foto: </span>
+    <Photo
+      src={project.image}
+      alt=""
+      icon={iconByCategory[project.category]}
+      tone={toneByCategory[project.category]}
+      label={project.location}
+      class:list={[aspectClass, "w-full rounded-2xl"]}
+    />
+    <span class="mt-4 block">
+      <span class="eyebrow text-terracotta-dark">{labelByCategory[project.category]}</span>
+      <span class="font-display mt-1 block text-lg font-semibold text-forest">{project.title}</span>
+      {!compact && <span class="mt-2 block text-base leading-relaxed text-ink-soft">{project.description}</span>}
+    </span>
+  </button>
+</article>

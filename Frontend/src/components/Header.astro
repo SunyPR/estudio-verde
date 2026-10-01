@@ -1,0 +1,93 @@
+---
+import Icon from "./Icon.astro";
+import { NAV_LINKS, SITE } from "../data/site";
+---
+
+<header id="site-header" class="sticky top-0 z-50 border-b border-forest/10 bg-cream/90 backdrop-blur-sm">
+  <div class="header-bar mx-auto flex max-w-6xl items-center justify-between px-5 sm:px-8">
+    <a href="/" class="header-logo inline-flex min-h-11 items-center font-display text-xl font-semibold tracking-tight text-forest sm:text-2xl">
+      {SITE.name}
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex">
+      {NAV_LINKS.map((link) => (
+        <a
+          href={link.href}
+          class="inline-flex min-h-11 items-center text-sm font-medium text-ink-soft transition hover:text-forest"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href="/#contacto" class="btn btn-primary">
+        Contactanos
+      </a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      class="flex h-11 w-11 items-center justify-center rounded-full text-forest lg:hidden"
+    >
+      <Icon name="menu" id="icon-menu" class="h-7 w-7" />
+      <Icon name="close" id="icon-close" class="hidden h-7 w-7" />
+    </button>
+  </div>
+
+  <!-- Menú móvil -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-1 border-t border-forest/10 bg-cream px-5 pb-6 pt-2 lg:hidden"
+  >
+    {NAV_LINKS.map((link) => (
+      <a
+        href={link.href}
+        class="flex min-h-11 items-center rounded-lg px-2 text-base font-medium text-ink-soft transition hover:bg-forest/5 hover:text-forest"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a href="/#contacto" class="btn btn-primary mt-3 w-full">
+      Contactanos
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const iconMenu = document.getElementById("icon-menu");
+  const iconClose = document.getElementById("icon-close");
+
+  function setOpen(open: boolean) {
+    menu?.classList.toggle("hidden", !open);
+    menu?.classList.toggle("flex", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    iconMenu?.classList.toggle("hidden", open);
+    iconClose?.classList.toggle("hidden", !open);
+  }
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.contains("flex");
+      setOpen(!isOpen);
+    });
+
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
+  }
+
+  const header = document.getElementById("site-header");
+
+  function syncHeader() {
+    header?.classList.toggle("is-compact", window.scrollY > 12);
+  }
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+</script>

@@ -1,0 +1,32 @@
+---
+import ProjectCard from "../ProjectCard.astro";
+import ProjectDialog from "../ProjectDialog.astro";
+import Icon from "../Icon.astro";
+import { PROJECTS } from "../../data/projects";
+
+const destacados = PROJECTS.slice(0, 4);
+---
+
+<section id="proyectos" class="section-pad scroll-mt-28 mx-auto max-w-6xl px-5 sm:px-8">
+  <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+    <div class="max-w-2xl min-w-0">
+      <p class="eyebrow">Proyectos</p>
+      <h2 class="font-display mt-3 text-balance text-3xl font-semibold text-forest sm:text-4xl">
+        La evidencia está en los proyectos
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-ink-soft">
+        Una muestra de casas, remodelaciones, locales y jardines en los que ya trabajamos.
+      </p>
+    </div>
+    <a href="/proyectos" class="btn btn-secondary w-full sm:w-auto">
+      Ver todos los proyectos
+      <Icon name="arrow-right" class="h-4 w-4 shrink-0" />
+    </a>
+  </div>
+
+  <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {destacados.map((project) => <ProjectCard project={project} aspect="4/5" compact />)}
+  </div>
+</section>
+
+<ProjectDialog projects={destacados} />

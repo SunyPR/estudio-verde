@@ -1,0 +1,39 @@
+---
+// -----------------------------------------------------------------------
+// PlaceholderPhoto.astro
+//
+// Reemplazo visual mientras no tenemos las fotos reales de los proyectos.
+// En vez de una caja gris de "imagen rota", usamos la paleta de marca +
+// un ícono + una etiqueta, para que la sección se vea intencional.
+//
+// Cuando llegue la foto real (o generada con IA), reemplazar por:
+//   <img src="..." alt="..." class="h-full w-full object-cover" />
+// dentro del mismo contenedor (mantiene el aspect-ratio y el radius).
+// -----------------------------------------------------------------------
+import Icon from "./Icon.astro";
+
+interface Props {
+  icon?: "house" | "remodel" | "store" | "leaf";
+  label?: string;
+  class?: string;
+  tone?: "forest" | "terracotta" | "olive" | "sand";
+}
+
+const { icon = "leaf", label = "Foto próximamente", class: className = "", tone = "forest" } = Astro.props;
+
+const tones: Record<string, string> = {
+  forest: "from-forest/90 to-forest-dark/95 text-cream",
+  terracotta: "from-terracotta/90 to-terracotta-dark/95 text-cream",
+  olive: "from-olive/85 to-forest/90 text-cream",
+  sand: "from-sand/70 to-sand-light/60 text-ink",
+};
+---
+
+<div
+  class={`relative overflow-hidden rounded-2xl texture-paper bg-gradient-to-br ${tones[tone]} ${className}`}
+>
+  <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
+    <Icon name={icon} class="h-10 w-10 opacity-90" />
+    <span class="max-w-[14rem] text-sm font-semibold uppercase tracking-[0.12em] opacity-80">{label}</span>
+  </div>
+</div>

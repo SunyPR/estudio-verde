@@ -1,0 +1,37 @@
+---
+// -----------------------------------------------------------------------
+// ContactButtons.astro
+// WhatsApp es el medio principal. El mail queda como respaldo, con una
+// línea que lo presenta así. Se usa en Contacto y al final de proyectos.
+// -----------------------------------------------------------------------
+import Icon from "./Icon.astro";
+import { SITE } from "../data/site";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const centered = className.includes("justify-center");
+---
+
+<div
+  class:list={[
+    "flex flex-col gap-3",
+    centered ? "items-center" : "items-stretch sm:items-start",
+    className,
+  ]}
+>
+  <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full sm:w-auto">
+    <Icon name="whatsapp" class="h-5 w-5 shrink-0" />
+    Escribinos por WhatsApp
+  </a>
+  <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+    <p class="text-sm leading-snug text-ink-soft">Si no tenés WhatsApp, escribinos por mail</p>
+    <a href={SITE.mailtoHref} class="btn btn-secondary w-full sm:w-auto">
+      <Icon name="mail" class="h-5 w-5 shrink-0" />
+      Enviar un email
+    </a>
+  </div>
+</div>

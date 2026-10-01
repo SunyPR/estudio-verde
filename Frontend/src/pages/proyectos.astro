@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ProjectDialog from "../components/ProjectDialog.astro";
+import ContactButtons from "../components/ContactButtons.astro";
+import { CATEGORIES, PROJECTS } from "../data/projects";
+---
+
+<Layout
+  title="Proyectos"
+  description="Casas, remodelaciones, locales comerciales y jardines diseñados y construidos por Estudio Verde en Rosario."
+>
+  <section class="bg-forest texture-paper text-cream">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <p class="eyebrow text-sand-light">Proyectos</p>
+      <h1 class="font-display mt-3 max-w-2xl text-balance text-4xl font-semibold sm:text-5xl">
+        Nuestro trabajo, de principio a fin
+      </h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-cream/80">
+        Casas, remodelaciones, locales comerciales y espacios verdes que diseñamos y
+        construimos con conciencia ambiental.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad mx-auto max-w-6xl px-5 sm:px-8">
+    <!-- Filtro de categorías -->
+    <div id="filtros" class="flex scroll-mt-28 flex-wrap gap-2.5">
+      {CATEGORIES.map((cat, index) => (
+        <button
+          type="button"
+          data-filter={cat.id}
+          class:list={["filter-btn rounded-full border font-medium transition", index === 0 && "is-active"]}
+          aria-pressed={index === 0 ? "true" : "false"}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div id="grid-proyectos" class="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {PROJECTS.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    <p id="sin-resultados" class="mt-10 hidden text-center text-base text-ink-soft">
+      Todavía no hay proyectos cargados en esta categoría.
+    </p>
+  </section>
+
+  <ProjectDialog projects={PROJECTS} />
+
+  <section class="bg-cream-dark/60 texture-paper">
+    <div class="mx-auto max-w-6xl px-5 py-16 text-center sm:px-8">
+      <h2 class="font-display text-2xl font-semibold text-forest sm:text-3xl">
+        ¿Te gustaría algo así para tu espacio?
+      </h2>
+      <p class="mx-auto mt-3 max-w-md text-base leading-relaxed text-ink-soft">
+        Contanos tu idea y charlamos de los próximos pasos, sin compromiso.
+      </p>
+      <div class="mt-6">
+        <ContactButtons class="sm:justify-center" />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Filtro de proyectos. El encabezado, la entrada al scroll y la foto ampliada
+  // tienen su propio script en el componente que los arma.
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const cards = document.querySelectorAll<HTMLElement>("#grid-proyectos > [data-category]");
+  const emptyState = document.getElementById("sin-resultados");
+
+  function applyFilter(filter: string) {
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const matches = filter === "todos" || card.dataset.category === filter;
+      card.classList.toggle("hidden", !matches);
+      if (matches) visibleCount += 1;
+    });
+
+    emptyState?.classList.toggle("hidden", visibleCount !== 0);
+  }
+
+  function setActive(filter: string) {
+    buttons.forEach((button) => {
+      const isActive = button.dataset.filter === filter;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+    applyFilter(filter);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setActive(button.dataset.filter ?? "todos");
+    });
+  });
+
+  const categoria = new URLSearchParams(window.location.search).get("categoria");
+  const permitidas = new Set(Array.from(buttons).map((button) => button.dataset.filter));
+
+  if (categoria && permitidas.has(categoria)) {
+    setActive(categoria);
+    document.getElementById("filtros")?.scrollIntoView({ block: "start" });
+  }
+</script>

@@ -1,0 +1,44 @@
+---
+import Icon from "../Icon.astro";
+import Photo from "../Photo.astro";
+---
+
+<section class="relative overflow-hidden bg-forest texture-paper text-cream">
+  <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-olive/30 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-terracotta/25 blur-3xl"></div>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:py-20">
+    <div class="order-1 min-w-0 lg:order-2">
+      <Photo
+        src="/images/estudio/hero.webp"
+        alt="Casa de ladrillo y jardín nativo al atardecer, en un barrio de Rosario"
+        label="Estudio Verde"
+        icon="house"
+        tone="forest"
+        priority
+        class="aspect-video w-full rounded-2xl"
+      />
+    </div>
+
+    <div class="order-2 min-w-0 lg:order-1">
+      <p class="eyebrow text-sand-light">Arquitectura &amp; Paisajismo · Rosario</p>
+
+      <h1 class="font-display mt-4 max-w-3xl text-balance text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
+        Diseñamos y construimos espacios con conciencia ambiental.
+      </h1>
+
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg">
+        Estudio Verde acompaña cada proyecto de principio a fin: casas, remodelaciones,
+        locales comerciales y espacios verdes, pensados para convivir con su entorno —
+        desde la primera charla hasta la obra terminada.
+      </p>
+
+      <div class="mt-8">
+        <a href="/proyectos" class="btn btn-outline-light w-full sm:w-fit">
+          Ver proyectos
+          <Icon name="arrow-right" class="h-4 w-4 shrink-0" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+---
+// Foto real si el archivo ya está en public/. Si no, el recuadro de color.
+// La comprobación es al compilar: copiar el .webp y volver a cargar alcanza.
+import fs from "node:fs";
+import path from "node:path";
+import PlaceholderPhoto from "./PlaceholderPhoto.astro";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  icon?: "house" | "remodel" | "store" | "leaf";
+  tone?: "forest" | "terracotta" | "olive" | "sand";
+  label?: string;
+  /** cover recorta dentro del aspect-ratio del padre. contain muestra el encuadre entero. */
+  fit?: "cover" | "contain";
+  priority?: boolean;
+}
+
+const {
+  src,
+  alt,
+  class: className = "",
+  icon = "leaf",
+  tone = "forest",
+  label = "Foto próximamente",
+  fit = "cover",
+  priority = false,
+} = Astro.props;
+
+// process.cwd() es Frontend/ al compilar. import.meta.url apunta al módulo
+// compilado, así que ../../public no existe en `astro build` y caía el recuadro.
+const relative = src.replace(/^\//, "");
+const exists = fs.existsSync(path.join(process.cwd(), "public", relative));
+---
+
+<div class:list={["photo-frame relative overflow-hidden", fit === "cover" && "photo-zoom", className]}>
+  {
+    exists ? (
+      <img
+        src={src}
+        alt={alt}
+        class:list={[
+          fit === "cover" ? "absolute inset-0 h-full w-full object-cover" : "h-auto w-full object-contain",
+        ]}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchpriority={priority ? "high" : "auto"}
+      />
+    ) : (
+      <PlaceholderPhoto
+        icon={icon}
+        tone={tone}
+        label={label}
+        class:list={[fit === "cover" ? "absolute inset-0 h-full w-full" : "aspect-[4/3] w-full", "rounded-none"]}
+      />
+    )
+  }
+</div>

@@ -1,0 +1,30 @@
+---
+import Icon from "../Icon.astro";
+import { SITE } from "../../data/site";
+---
+
+<section class="bg-cream-dark/60 texture-paper">
+  <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+    <div class="flex flex-col items-center justify-between gap-6 rounded-3xl bg-forest px-6 py-10 text-center text-cream sm:flex-row sm:px-10 sm:text-left">
+      <div>
+        <p class="eyebrow text-sand-light">Seguinos en Instagram</p>
+        <h2 class="font-display mt-2 text-2xl font-semibold sm:text-3xl">
+          Mirá el día a día del estudio
+        </h2>
+        <p class="mt-2 max-w-md text-base leading-relaxed text-cream/80">
+          Más fotos de proyectos terminados, obras en curso y jardines en{" "}
+          {SITE.instagramHandle}.
+        </p>
+      </div>
+      <a
+        href={SITE.instagramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-outline-light w-full shrink-0 sm:w-auto"
+      >
+        <Icon name="instagram" class="h-4.5 w-4.5" />
+        Ir a Instagram
+      </a>
+    </div>
+  </div>
+</section>
