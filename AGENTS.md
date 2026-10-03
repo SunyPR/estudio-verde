@@ -32,6 +32,7 @@ Desde `Frontend/`: `npm run dev -- --background` (`npx astro dev stop` para para
 - ✅ Siempre: editar contenido vía `src/data/`, conservar el tono y verificar la UI en el navegador.
 - ✅ Siempre: actualizar `MEMORY.md` al terminar cada tarea.
 - ✅ Siempre: actualizar `CHANGELOG.md` al terminar cada tarea.
+- ✅ Siempre: actualizar `CHANGELOG.md` al terminar cada tarea.
 - ⚠ Pregunta antes: dependencias, archivos nuevos, formato de `src/data/` o rutas públicas.
 - 🚫 Nunca: precios, dirección exacta, inventar un contacto real, ni commitear salvo pedido explícito.
 

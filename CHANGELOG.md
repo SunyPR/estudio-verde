@@ -9,6 +9,20 @@ y el proyecto usa [versionado semántico](https://semver.org/lang/es/).
 
 ### Added
 
+- `Reporte.md`: informe único del proyecto (problema que cubre la web, stack y estado actual).
+
+### Changed
+
+- El `README.md` raíz pasa a ser la presentación del trabajo práctico. Deja de ser la carta personal de GitHub.
+
+### Removed
+
+- La ficha «Un solo lugar, sin perder nada» de la sección de contacto (WhatsApp, mail y el texto que los presentaba). Quedan el título, los botones y la nota de zona.
+- `Reporte-cambios.md` y `Reporte-verificacion.md`. Quedaron desactualizados frente al sitio con fotos y WhatsApp de Rosario.
+- `Frontend/README.md`, el texto genérico de la plantilla de Astro.
+
+### Added
+
 - Las 16 fotos WebP de `Imágenes/` quedan servidas por el sitio. Los JPG de `Imágenes/originales/` no se publican.
 
   Estudio (`Frontend/public/images/estudio/`):
@@ -58,7 +72,8 @@ y el proyecto usa [versionado semántico](https://semver.org/lang/es/).
 
 - Varias WebP siguen por encima del peso previsto (unos 80–150 KB; el hero, hasta unos 200 KB). El conjunto publicado pesa cerca de 5,2 MB. Lo más pesado: jardines (~980 KB), casas (~655 KB), locales (~519 KB), Martín (~512 KB) y Paula (~400 KB). Si la página se siente lenta en el celular, conviene volver a comprimir esas cinco sin tocar los JPG originales.
 - `npm run astro check` falla con 8 errores de tipos (`node:` / `process` en `Photo.astro` y el `<dialog>`). El build igual termina.
-- Falta `og:image`. En Vercel hay que poner Root Directory `Frontend`.
+- Falta `og:image`.
+- La URL de Vercel redirige al login de Vercel. El deployment no está abierto al público.
 
 
 ## [0.1.0] — 2026-09-30
